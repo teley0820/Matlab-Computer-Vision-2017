@@ -1,0 +1,12 @@
+%Program: facialTrack
+%Description: Takes 10 frames of images from an attached webcam. After that, the program draws a bounding box around each face that is detected in each image. Once image has been analyzed, it plays back a greyscale version of each picture in order, essentially making a simple 10 frame video with motion tracking
+%Required for the facialTrack program
+%Requires the MatLab webcam addon. You can get this through the Add-On browser located in the Environment Section of the Home Menu in Matlab
+clear %Clears the workspace. This is to ensure that there is only one webcam object
+pause(1) %Waits 1 second. This gives the user enough time to be in clear view of the webcam before it takes photos.
+cam = webcam %Creates a web camera object. It uses any detected web camera that is attached to the computer.
+cam.Resolution = '320x240';%Limits the resolution of the camera to 320 by 240. The program works with any resolution, however by using a small resolution, runtime is reduced.
+faceDetector = vision.CascadeObjectDetector; %Creates the facial recognition object. The default setting detects faces that look directly at the camera
+imgArray = cam2ImgArray(cam,faceDetector)% Takes 10 pictures, detects faces, and outputs an array of 10 photos with bounding boxes around each detected face. [2]
+mplay(imgArray)%Plays back the 10 frames of images as a video.
+clear cam

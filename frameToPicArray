@@ -1,0 +1,81 @@
+%Function: frameToPicArray(<imgArray>, <CascadeObjectDetector>)
+%Description:Converts the array of images into a array of frames with a bounding box around any detected face
+%Required for the facialTrack program and cam2ImgArray function
+function [ picArray ] = frameToPicArray( imgArray,faceDetector )
+i =1;
+i=i+1
+image1 =imgArray(:,:,i); %Takes image1 from the image array
+bboxes = step(faceDetector,image1) %Looks for faces in the picture
+faces = insertObjectAnnotation(image1, 'rectangle', bboxes, 'Face Detected');%Draws a bounding box around each face
+figure, imshow(faces), title('Output') %Displays the image
+f = getframe;
+[pic1,map1] = frame2im(f) %Converts the frame (The graph that is generated with a bounding box around each face) into a image object
+%This process is continued for each of the 10 photos
+i=i+1
+image2 =imgArray(:,:,i);
+bboxes = step(faceDetector,image2)
+faces = insertObjectAnnotation(image2, 'rectangle', bboxes, 'Face Detected');
+figure, imshow(faces), title('Output')
+f = getframe;
+[pic2,map2] = frame2im(f)
+i=i+1
+image3 =imgArray(:,:,i);
+bboxes = step(faceDetector,image3)
+faces = insertObjectAnnotation(image3, 'rectangle', bboxes, 'Face Detected');
+figure, imshow(faces), title('Output')
+f = getframe;
+[pic3,map3] = frame2im(f)
+i=i+1
+image4 =imgArray(:,:,i);
+bboxes = step(faceDetector,image4)
+faces = insertObjectAnnotation(image4, 'rectangle', bboxes, 'Face Detected');
+figure, imshow(faces), title('Output')
+f = getframe;
+[pic4,map4] = frame2im(f)
+i=i+1
+image5 =imgArray(:,:,i);
+bboxes = step(faceDetector,image5)
+faces = insertObjectAnnotation(image5, 'rectangle', bboxes, 'Face Detected');
+figure, imshow(faces), title('Output')
+f = getframe;
+[pic5,map5] = frame2im(f)
+i=i+1
+image6 =imgArray(:,:,i);
+bboxes = step(faceDetector,image6)
+faces = insertObjectAnnotation(image6, 'rectangle', bboxes, 'Face Detected');
+figure, imshow(faces), title('Output')
+f = getframe;
+[pic6,map6] = frame2im(f)
+i=i+1
+image7 =imgArray(:,:,i);
+bboxes = step(faceDetector,image7)
+faces = insertObjectAnnotation(image7, 'rectangle', bboxes, 'Face Detected');
+figure, imshow(faces), title('Output')
+f = getframe;
+[pic7,map7] = frame2im(f)
+i=i+1
+image8 =imgArray(:,:,i);
+bboxes = step(faceDetector,image8)
+faces = insertObjectAnnotation(image8, 'rectangle', bboxes, 'Face Detected');
+figure, imshow(faces), title('Output')
+f = getframe;
+[pic8,map8] = frame2im(f)
+i=i+1
+image9 =imgArray(:,:,i);
+bboxes = step(faceDetector,image9)
+faces = insertObjectAnnotation(image9, 'rectangle', bboxes, 'Face Detected');
+figure, imshow(faces), title('Output')
+f = getframe;
+[pic9,map9] = frame2im(f)
+i=i+1
+image10 =imgArray(:,:,i);
+bboxes = step(faceDetector,image10)
+faces = insertObjectAnnotation(image10, 'rectangle', bboxes, 'Face Detected');
+figure, imshow(faces), title('Output')
+f = getframe;
+[pic10,map10] = frame2im(f)
+%At this point, we have 10 images with a bounding box around each face that
+%is detected.
+%This block of code converts the images of frames into an array of regular images
+picArray=cat(3,pic1,pic2,pic3,pic4,pic5,pic6,pic7,pic8,pic9,pic10)
+end

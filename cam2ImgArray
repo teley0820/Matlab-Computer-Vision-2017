@@ -1,0 +1,20 @@
+%Function: cam2ImgArray(<webcam>, <CascadeObjectDetector>)
+%Description: Takes 10 frames worth of photos from the webcam.
+%Required for the facialTrack program
+function [ out ] = cam2ImgArray(cam,faceDetector)
+image1=cam.snapshot
+image2=cam.snapshot
+image3=cam.snapshot
+image4=cam.snapshot
+image5=cam.snapshot
+image6=cam.snapshot
+image7=cam.snapshot
+image8=cam.snapshot
+image9=cam.snapshot
+image10=cam.snapshot
+clear cam
+%Converts the 10 frames into a single array
+imgArray=cat(3,image1,image3,image4,image5...
+,image6,image7,image8,image9,image10)
+out = frameToPicArray(imgArray,faceDetector)%Converts the array of images into an array of frames with a bounding box around any detected faces
+end

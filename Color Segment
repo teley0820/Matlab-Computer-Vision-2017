@@ -1,0 +1,25 @@
+%PROGRAM: Color Segment
+%DESCRIPTION: Takes a image, and separates it into two layers, a foreground
+%and a background. The output is an image where the background is black and
+%the foreground is a color chosen by the user. [3][4]
+%This is the sample images I used.
+lizard = imread('C:\Users\Tyler\Desktop\Assets for Lin Alg Report\Source Images\lizardbro.jpg'); %You will want to change the filepath to match your image
+%This block of code contains variables that the user can change
+imageToUse = lizard %This variable represents the image to use.
+radius = 20 %As the value of radius increases, more of the image will be colored. Any pixels that are uncolored will be black.
+red = 219; %This determines the red value of the images color
+green = 15;%This determines the green value of the images color
+blue = 15; %This determines the blue value of the images color
+red = red/255
+green = green/255
+blue = blue/255
+imageGrey = rgb2gray(imageToUse) %Converts the image to greyscale
+j = 0;
+background = imopen(imageGrey,strel('disk',radius));%The background is composed of several disks with a size equal to radius
+figure
+surf(double(background(1:8:end,1:8:end))),zlim([0 255]); set(gca,'ydir','reverse'); %The 3 lines above are used for preprocessing
+image2 = imageGrey - background; %Subtracts the background from the image.
+bwImage = imbinarize(image2);%Cleans up background. Without this, the program runs, however the background is partially colored as well
+bwImage = bwareaopen(bwImage, 50);
+rgbImage = cat(3, red*double(bwImage), green*double(bwImage), blue*double(bwImage));%Colors all white pixels the selected color
+imshow(rgbImage) %Display Final Image
